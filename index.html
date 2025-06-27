@@ -22,16 +22,17 @@
       text-align: center;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     .kanji-parts, .kanji-meaning, .kanji-reading, .kanji-combo {
       display: none;
     }
-    .kanji-card.active .kanji-parts,
-    .kanji-card.active .kanji-meaning,
-    .kanji-card.active .kanji-reading {
+    .show-details .kanji-parts,
+    .show-details .kanji-meaning,
+    .show-details .kanji-reading {
       display: block;
     }
-    .kanji-card.combo .kanji-combo {
+    .show-details.show-combo .kanji-combo {
       display: block;
     }
     .kanji-main {
@@ -72,13 +73,13 @@
 
   <script>
     function toggleCard(el) {
-      if (!el.classList.contains('active')) {
-        el.classList.add('active');
-      } else if (!el.classList.contains('combo')) {
-        el.classList.add('combo');
+      if (!el.classList.contains('show-details')) {
+        el.classList.add('show-details');
+      } else if (!el.classList.contains('show-combo')) {
+        el.classList.add('show-combo');
       } else {
-        el.classList.remove('active');
-        el.classList.remove('combo');
+        el.classList.remove('show-combo');
+        el.classList.remove('show-details');
       }
     }
   </script>
