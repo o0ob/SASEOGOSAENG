@@ -1,150 +1,77 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>사서고생</title>
+  <meta charset="UTF-8" />
+  <title>한자 카드 예시</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff;
-      color: #111;
-    }
-    header {
-      background: #000;
-      color: #fff;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    nav {
-      background: #222;
-    }
-    .nav-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 1rem;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      padding: 1rem;
-    }
-    .nav-links a:hover {
-      background: #555;
-    }
-    .hamburger {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #fff;
-    }
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: #222;
-        width: 100%;
-      }
-      .nav-links.active {
-        display: flex;
-      }
-      .hamburger {
-        display: block;
-      }
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    section h2 {
-      border-bottom: 2px solid #000;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      padding: 2rem 0;
-      background: #f5f5f5;
-      color: #666;
-    }
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    .mode-buttons button { margin: 5px; }
+    .card { background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
+    .details { display: none; margin-top: 10px; background: #f0f0f0; padding: 10px; border-radius: 5px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>사서고생</h1>
-    <p>운영자: 주인장</p>
-  </header>
+  <h1>한자 카드 샘플</h1>
 
-  <nav>
-    <div class="nav-container">
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <div class="nav-links" id="navLinks">
-        <a href="#home">홈</a>
-        <a href="#kanji">한자</a>
-        <a href="#n3">N3</a>
-        <a href="#n2">N2</a>
-        <a href="#n1">N1</a>
-      </div>
+  <div class="mode-buttons">
+    <button onclick="setMode('kanji')">한자만</button>
+    <button onclick="setMode('kanjiFurigana')">한자+후리가나</button>
+    <button onclick="setMode('meaning')">뜻만</button>
+  </div>
+
+  <div class="card" onclick="toggleDetails(this)">
+    <div class="kanji">勉強</div>
+    <div class="furigana">（べんきょう）</div>
+    <div class="meaning">공부</div>
+    <div class="details">
+      <strong>勉:</strong> 免(면할 면) + 力(힘 력) → 힘씀<br />
+      <strong>強:</strong> 弓(활 궁) + 虫(벌레 충) → 강함<br />
+      👉 스토리: 면할 수 없을 정도로 힘써서 강해짐 → 공부
     </div>
-  </nav>
+  </div>
 
-  <main>
-    <section id="home">
-      <h2>홈</h2>
-      <p>이 사이트는 JLPT N3~N1을 준비하는 주인장의 개인 일본어 정리 노트입니다.</p>
-    </section>
+  <div class="card" onclick="toggleDetails(this)">
+    <div class="kanji">練習</div>
+    <div class="furigana">（れんしゅう）</div>
+    <div class="meaning">연습</div>
+    <div class="details">
+      <strong>練:</strong> 糸(실 사) + 東(동녘 동)<br />
+      <strong>習:</strong> 羽(깃 우) + 白(흰 백)<br />
+      👉 스토리: 실처럼 엮어 배우고, 날개처럼 익힘 → 연습
+    </div>
+  </div>
 
-    <section id="kanji">
-      <h2>한자</h2>
-      <ul>
-        <li>勉強（べんきょう）：공부</li>
-        <li>練習（れんしゅう）：연습</li>
-        <li>試験（しけん）：시험</li>
-      </ul>
-    </section>
-
-    <section id="n3">
-      <h2>N3 문법</h2>
-      <h3>〜ようにする</h3>
-      <p>의미: ~하도록 하다<br>
-      예문: 毎日日本語を勉強するようにしています。</p>
-
-      <h3>〜つもり</h3>
-      <p>의미: ~할 생각이다<br>
-      예문: 来年、日本に行くつもりです。</p>
-    </section>
-
-    <section id="n2">
-      <h2>N2</h2>
-      <p>N2 문법/단어/문제 정리 내용이 여기에 들어갑니다.</p>
-    </section>
-
-    <section id="n1">
-      <h2>N1</h2>
-      <p>N1 문법/단어/문제 정리 내용이 여기에 들어갑니다.</p>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 사서고생. All rights reserved.
-  </footer>
+  <div class="card" onclick="toggleDetails(this)">
+    <div class="kanji">試験</div>
+    <div class="furigana">（しけん）</div>
+    <div class="meaning">시험</div>
+    <div class="details">
+      <strong>試:</strong> 言(말씀 언) + 式(법 식)<br />
+      <strong>験:</strong> 馬(말 마) + 僉(다 첨)<br />
+      👉 스토리: 말로 규칙을 묻고, 말로 다같이 시험 → 시험
+    </div>
+  </div>
 
   <script>
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
+    let mode = 'kanjiFurigana';
+    setMode(mode);
+
+    function setMode(newMode) {
+      mode = newMode;
+      document.querySelectorAll('.card').forEach(card => {
+        card.querySelector('.kanji').style.display = (mode === 'kanji' || mode === 'kanjiFurigana') ? 'block' : 'none';
+        card.querySelector('.furigana').style.display = (mode === 'kanjiFurigana') ? 'block' : 'none';
+        card.querySelector('.meaning').style.display = (mode === 'meaning') ? 'block' : 'none';
+      });
+    }
+
+    function toggleDetails(card) {
+      const details = card.querySelector('.details');
+      if (details.style.display === 'block') {
+        details.style.display = 'none';
+      } else {
+        details.style.display = 'block';
+      }
     }
   </script>
 </body>
