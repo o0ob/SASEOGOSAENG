@@ -1,88 +1,110 @@
+# Recreate the ZIP file after execution state reset
+
+from zipfile import ZipFile
+
+# HTML content for the final version again
+html_content = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>定 카드 예시</title>
+  <title>安定 쪼개기</title>
   <style>
     body {
       font-family: sans-serif;
-      padding: 20px;
+      padding: 40px;
       background: #f9f9f9;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
     }
-    .kanji-card {
-      width: 220px;
-      border: 2px dashed #aaa;
-      border-radius: 12px;
-      padding: 20px;
+    .card {
       background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      padding: 30px;
       text-align: center;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      width: 300px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .kanji {
+      font-size: 60px;
+      display: inline-block;
+      margin: 0 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
-    .kanji-parts, .kanji-meaning, .kanji-reading, .kanji-combo {
-      display: none;
+    .kanji:hover {
+      color: #0077cc;
     }
-    .show-details .kanji-parts,
-    .show-details .kanji-meaning,
-    .show-details .kanji-reading {
-      display: block;
-    }
-    .show-details.show-combo .kanji-combo {
-      display: block;
-    }
-    .kanji-main {
-      font-size: 72px;
-      margin-bottom: 10px;
-    }
-    .kanji-parts {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    .kanji-meaning {
+    .furigana {
       font-size: 18px;
-      margin-bottom: 10px;
+      margin: 10px 0;
+      display: block;
     }
-    .kanji-reading {
-      font-size: 16px;
-      text-align: left;
-      line-height: 1.4;
-    }
-    .kanji-combo {
+    .meaning {
       font-size: 20px;
-      margin-top: 10px;
-      color: #333;
+      margin-bottom: 20px;
+    }
+    .details {
+      font-size: 18px;
+      text-align: left;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="kanji-card" onclick="toggleCard(this)">
-    <div class="kanji-main">定</div>
-    <div class="kanji-parts">宀(집) + 正(바르다) = 定</div>
-    <div class="kanji-meaning">집이 바르다 → 안정되다, 정하다</div>
-    <div class="kanji-reading">
-      <strong>음독:</strong> てい<br>
-      <strong>훈독:</strong> さだめる
+  <!-- 첫 페이지 -->
+  <div id="main-card" class="card">
+    <div>
+      <span class="kanji" onclick="showDetail('an')">安</span>
+      <span class="kanji" onclick="showDetail('tei')">定</span>
     </div>
-    <div class="kanji-combo">예: 安定(안정)</div>
+    <span class="furigana">（あんてい）</span>
+    <div class="meaning">안정</div>
+  </div>
+
+  <!-- 安 쪼개기 페이지 -->
+  <div id="an-detail" class="card hidden">
+    <div class="kanji" onclick="goBack()">安</div>
+    <div class="details">
+      <strong>宀(집) + 女(여자)</strong><br>
+      집 안의 여자 → 편안하다
+    </div>
+  </div>
+
+  <!-- 定 쪼개기 페이지 -->
+  <div id="tei-detail" class="card hidden">
+    <div class="kanji" onclick="goBack()">定</div>
+    <div class="details">
+      <strong>宀(집) + 正(바르다)</strong><br>
+      집이 바르다 → 안정되다, 정하다
+    </div>
   </div>
 
   <script>
-    function toggleCard(el) {
-      if (!el.classList.contains('show-details')) {
-        el.classList.add('show-details');
-      } else if (!el.classList.contains('show-combo')) {
-        el.classList.add('show-combo');
-      } else {
-        el.classList.remove('show-combo');
-        el.classList.remove('show-details');
-      }
+    function showDetail(which) {
+      document.getElementById('main-card').classList.add('hidden');
+      document.getElementById(which + '-detail').classList.remove('hidden');
+    }
+    function goBack() {
+      document.getElementById('main-card').classList.remove('hidden');
+      document.getElementById('an-detail').classList.add('hidden');
+      document.getElementById('tei-detail').classList.add('hidden');
     }
   </script>
 </body>
 </html>
+"""
 
+# Write to file
+with open("/mnt/data/index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+# Zip it
+zip_path = "/mnt/data/kanji_split_system.zip"
+with ZipFile(zip_path, 'w') as zipf:
+    zipf.write("/mnt/data/index.html", arcname="index.html")
+
+zip_path
