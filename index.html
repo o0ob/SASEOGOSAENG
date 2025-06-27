@@ -21,6 +21,18 @@
       background: #fff;
       text-align: center;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+    .kanji-parts, .kanji-meaning, .kanji-reading, .kanji-combo {
+      display: none;
+    }
+    .kanji-card.active .kanji-parts,
+    .kanji-card.active .kanji-meaning,
+    .kanji-card.active .kanji-reading {
+      display: block;
+    }
+    .kanji-card.combo .kanji-combo {
+      display: block;
     }
     .kanji-main {
       font-size: 72px;
@@ -39,10 +51,15 @@
       text-align: left;
       line-height: 1.4;
     }
+    .kanji-combo {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
-  <div class="kanji-card">
+  <div class="kanji-card" onclick="toggleCard(this)">
     <div class="kanji-main">安</div>
     <div class="kanji-parts">宀 + 女 = 安</div>
     <div class="kanji-meaning">집 + 여자 = 편안하다</div>
@@ -50,6 +67,20 @@
       <strong>음독:</strong> あん<br>
       <strong>훈독:</strong> やすい
     </div>
+    <div class="kanji-combo">예: 安定(안정)</div>
   </div>
+
+  <script>
+    function toggleCard(el) {
+      if (!el.classList.contains('active')) {
+        el.classList.add('active');
+      } else if (!el.classList.contains('combo')) {
+        el.classList.add('combo');
+      } else {
+        el.classList.remove('active');
+        el.classList.remove('combo');
+      }
+    }
+  </script>
 </body>
 </html>
