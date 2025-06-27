@@ -2,75 +2,85 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>安定 카드 예시</title>
+  <title>한자 카드 예시</title>
   <style>
     body {
       font-family: sans-serif;
-      padding: 40px;
+      padding: 20px;
       background: #f9f9f9;
       display: flex;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    .card {
-      background: #fff;
-      border: 2px solid #ccc;
+    .kanji-card {
+      width: 220px;
+      border: 2px dashed #aaa;
       border-radius: 12px;
-      padding: 30px;
+      padding: 20px;
+      background: #fff;
       text-align: center;
-      width: 300px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .kanji {
-      font-size: 60px;
-      display: inline-block;
-      margin: 0 10px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
-    .kanji:hover {
-      color: #0077cc;
+    .kanji-parts, .kanji-meaning, .kanji-reading, .kanji-combo {
+      display: none;
     }
-    .furigana {
-      font-size: 18px;
-      margin: 10px 0;
+    .show-details .kanji-parts,
+    .show-details .kanji-meaning,
+    .show-details .kanji-reading {
       display: block;
     }
-    .meaning {
-      font-size: 20px;
-      margin-bottom: 20px;
+    .show-details.show-combo .kanji-combo {
+      display: block;
     }
-    .details {
-      display: none;
-      background: #f1f1f1;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 5px 0;
-      text-align: left;
+    .kanji-main {
+      font-size: 72px;
+      margin-bottom: 10px;
+    }
+    .kanji-parts {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .kanji-meaning {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .kanji-reading {
       font-size: 16px;
+      text-align: left;
+      line-height: 1.4;
+    }
+    .kanji-combo {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div>
-      <span class="kanji" onclick="toggleDetail('an')">安</span>
-      <span class="kanji" onclick="toggleDetail('tei')">定</span>
+  <div class="kanji-card" onclick="toggleCard(this)">
+    <div class="kanji-main">安</div>
+    <div class="kanji-parts">宀 + 女 = 安</div>
+    <div class="kanji-meaning">집 + 여자 = 편안하다</div>
+    <div class="kanji-reading">
+      <strong>음독:</strong> あん<br>
+      <strong>훈독:</strong> やすい
     </div>
-    <span class="furigana">（あんてい）</span>
-    <div class="meaning">안정</div>
-
-    <div id="an-detail" class="details">
-      <strong>安:</strong> 宀(지붕) + 女(여자) = 집 안의 여자 → 편안하다
-    </div>
-    <div id="tei-detail" class="details">
-      <strong>定:</strong> 宀(지붕) + 足(발) = 지붕 아래 발이 멈춤 → 정하다, 안정되다
-    </div>
+    <div class="kanji-combo">예: 安定(안정)</div>
   </div>
 
   <script>
-    function toggleDetail(kanji) {
-      const detail = document.getElementById(kanji + '-detail');
-      detail.style.display = (detail.style.display === 'block') ? 'none' : 'block';
+    function toggleCard(el) {
+      if (!el.classList.contains('show-details')) {
+        el.classList.add('show-details');
+      } else if (!el.classList.contains('show-combo')) {
+        el.classList.add('show-combo');
+      } else {
+        el.classList.remove('show-combo');
+        el.classList.remove('show-details');
+      }
     }
   </script>
 </body>
