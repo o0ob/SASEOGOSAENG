@@ -4,31 +4,40 @@
   <meta charset="UTF-8" />
   <title>한자 카드 예시</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
     .kanji-card {
-      width: 200px;
+      width: 220px;
       border: 2px dashed #aaa;
       border-radius: 12px;
       padding: 20px;
       background: #fff;
       text-align: center;
-      margin: 20px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     }
     .kanji-main {
-      font-size: 64px;
+      font-size: 72px;
       margin-bottom: 10px;
     }
     .kanji-parts {
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 10px;
     }
     .kanji-meaning {
-      font-size: 16px;
+      font-size: 18px;
       margin-bottom: 10px;
     }
     .kanji-reading {
-      font-size: 14px;
+      font-size: 16px;
       text-align: left;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -38,8 +47,8 @@
     <div class="kanji-parts">宀 + 女 = 安</div>
     <div class="kanji-meaning">집 + 여자 = 편안하다</div>
     <div class="kanji-reading">
-      음독: あん<br>
-      훈독: やすい
+      <strong>음독:</strong> あん<br>
+      <strong>훈독:</strong> やすい
     </div>
   </div>
 </body>
