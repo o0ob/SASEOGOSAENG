@@ -1,20 +1,17 @@
-# Create a new ZIP with 安心 split system
-
-from zipfile import ZipFile
-
-html_content = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>安心 쪼개기</title>
+  <title>安定 & 安心 쪼개기</title>
   <style>
     body {
       font-family: sans-serif;
       padding: 40px;
       background: #f9f9f9;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
     }
     .card {
       background: #fff;
@@ -54,26 +51,55 @@ html_content = """
   </style>
 </head>
 <body>
-  <!-- 첫 페이지 -->
-  <div id="main-card" class="card">
+
+  <!-- 安定 카드 -->
+  <div id="main-card-antei" class="card">
     <div>
-      <span class="kanji" onclick="showDetail('an')">安</span>
+      <span class="kanji" onclick="showDetail('an-antei')">安</span>
+      <span class="kanji" onclick="showDetail('tei')">定</span>
+    </div>
+    <span class="furigana">（あんてい）</span>
+    <div class="meaning">안정</div>
+  </div>
+
+  <!-- 安心 카드 -->
+  <div id="main-card-anshin" class="card">
+    <div>
+      <span class="kanji" onclick="showDetail('an-anshin')">安</span>
       <span class="kanji" onclick="showDetail('shin')">心</span>
     </div>
     <span class="furigana">（あんしん）</span>
     <div class="meaning">안심</div>
   </div>
 
-  <!-- 安 쪼개기 페이지 -->
-  <div id="an-detail" class="card hidden">
+  <!-- 安(안정) 쪼개기 -->
+  <div id="an-antei-detail" class="card hidden">
     <div class="kanji" onclick="goBack()">安</div>
     <div class="details">
       <strong>宀(집) + 女(여자)</strong><br>
-      집 안의 여자 → 편안하다
+      집 안의 여자 → 편안하다 (안정)
     </div>
   </div>
 
-  <!-- 心 쪼개기 페이지 -->
+  <!-- 定 쪼개기 -->
+  <div id="tei-detail" class="card hidden">
+    <div class="kanji" onclick="goBack()">定</div>
+    <div class="details">
+      <strong>宀(집) + 正(바르다)</strong><br>
+      집이 바르다 → 정하다, 안정되다
+    </div>
+  </div>
+
+  <!-- 安(안심) 쪼개기 -->
+  <div id="an-anshin-detail" class="card hidden">
+    <div class="kanji" onclick="goBack()">安</div>
+    <div class="details">
+      <strong>宀(집) + 女(여자)</strong><br>
+      집 안의 여자 → 편안하다 (안심)
+    </div>
+  </div>
+
+  <!-- 心 쪼개기 -->
   <div id="shin-detail" class="card hidden">
     <div class="kanji" onclick="goBack()">心</div>
     <div class="details">
@@ -84,26 +110,27 @@ html_content = """
 
   <script>
     function showDetail(which) {
-      document.getElementById('main-card').classList.add('hidden');
+      // 메인 카드 숨김
+      document.getElementById('main-card-antei').classList.add('hidden');
+      document.getElementById('main-card-anshin').classList.add('hidden');
+      // 모든 디테일 숨김
+      document.getElementById('an-antei-detail').classList.add('hidden');
+      document.getElementById('tei-detail').classList.add('hidden');
+      document.getElementById('an-anshin-detail').classList.add('hidden');
+      document.getElementById('shin-detail').classList.add('hidden');
+      // 선택한 디테일만 표시
       document.getElementById(which + '-detail').classList.remove('hidden');
     }
     function goBack() {
-      document.getElementById('main-card').classList.remove('hidden');
-      document.getElementById('an-detail').classList.add('hidden');
+      // 디테일 숨기고 메인 카드 보이기
+      document.getElementById('an-antei-detail').classList.add('hidden');
+      document.getElementById('tei-detail').classList.add('hidden');
+      document.getElementById('an-anshin-detail').classList.add('hidden');
       document.getElementById('shin-detail').classList.add('hidden');
+      document.getElementById('main-card-antei').classList.remove('hidden');
+      document.getElementById('main-card-anshin').classList.remove('hidden');
     }
   </script>
+
 </body>
 </html>
-"""
-
-# Write to file
-with open("/mnt/data/index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-# Create ZIP
-zip_path = "/mnt/data/anshin_split.zip"
-with ZipFile(zip_path, 'w') as zipf:
-    zipf.write("/mnt/data/index.html", arcname="index.html")
-
-zip_path
