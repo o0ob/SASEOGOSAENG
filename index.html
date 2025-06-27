@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,74 +5,42 @@
   <title>한자 카드 예시</title>
   <style>
     body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
-    .mode-buttons button { margin: 5px; }
-    .card { background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
-    .details { display: none; margin-top: 10px; background: #f0f0f0; padding: 10px; border-radius: 5px; }
+    .kanji-card {
+      width: 200px;
+      border: 2px dashed #aaa;
+      border-radius: 12px;
+      padding: 20px;
+      background: #fff;
+      text-align: center;
+      margin: 20px;
+    }
+    .kanji-main {
+      font-size: 64px;
+      margin-bottom: 10px;
+    }
+    .kanji-parts {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .kanji-meaning {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .kanji-reading {
+      font-size: 14px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
-  <h1>한자 카드 샘플</h1>
-
-  <div class="mode-buttons">
-    <button onclick="setMode('kanji')">한자만</button>
-    <button onclick="setMode('kanjiFurigana')">한자+후리가나</button>
-    <button onclick="setMode('meaning')">뜻만</button>
-  </div>
-
-  <div class="card" onclick="toggleDetails(this)">
-    <div class="kanji">勉強</div>
-    <div class="furigana">（べんきょう）</div>
-    <div class="meaning">공부</div>
-    <div class="details">
-      <strong>勉:</strong> 免(면할 면) + 力(힘 력) → 힘씀<br />
-      <strong>強:</strong> 弓(활 궁) + 虫(벌레 충) → 강함<br />
-      👉 스토리: 면할 수 없을 정도로 힘써서 강해짐 → 공부
+  <div class="kanji-card">
+    <div class="kanji-main">安</div>
+    <div class="kanji-parts">宀 + 女 = 安</div>
+    <div class="kanji-meaning">집 + 여자 = 편안하다</div>
+    <div class="kanji-reading">
+      음독: あん<br>
+      훈독: やすい
     </div>
   </div>
-
-  <div class="card" onclick="toggleDetails(this)">
-    <div class="kanji">練習</div>
-    <div class="furigana">（れんしゅう）</div>
-    <div class="meaning">연습</div>
-    <div class="details">
-      <strong>練:</strong> 糸(실 사) + 東(동녘 동)<br />
-      <strong>習:</strong> 羽(깃 우) + 白(흰 백)<br />
-      👉 스토리: 실처럼 엮어 배우고, 날개처럼 익힘 → 연습
-    </div>
-  </div>
-
-  <div class="card" onclick="toggleDetails(this)">
-    <div class="kanji">試験</div>
-    <div class="furigana">（しけん）</div>
-    <div class="meaning">시험</div>
-    <div class="details">
-      <strong>試:</strong> 言(말씀 언) + 式(법 식)<br />
-      <strong>験:</strong> 馬(말 마) + 僉(다 첨)<br />
-      👉 스토리: 말로 규칙을 묻고, 말로 다같이 시험 → 시험
-    </div>
-  </div>
-
-  <script>
-    let mode = 'kanjiFurigana';
-    setMode(mode);
-
-    function setMode(newMode) {
-      mode = newMode;
-      document.querySelectorAll('.card').forEach(card => {
-        card.querySelector('.kanji').style.display = (mode === 'kanji' || mode === 'kanjiFurigana') ? 'block' : 'none';
-        card.querySelector('.furigana').style.display = (mode === 'kanjiFurigana') ? 'block' : 'none';
-        card.querySelector('.meaning').style.display = (mode === 'meaning') ? 'block' : 'none';
-      });
-    }
-
-    function toggleDetails(card) {
-      const details = card.querySelector('.details');
-      if (details.style.display === 'block') {
-        details.style.display = 'none';
-      } else {
-        details.style.display = 'block';
-      }
-    }
-  </script>
 </body>
 </html>
