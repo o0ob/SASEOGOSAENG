@@ -1,8 +1,13 @@
+# Create a new ZIP with 安心 split system
+
+from zipfile import ZipFile
+
+html_content = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>安定 쪼개기</title>
+  <title>安心 쪼개기</title>
   <style>
     body {
       font-family: sans-serif;
@@ -53,10 +58,10 @@
   <div id="main-card" class="card">
     <div>
       <span class="kanji" onclick="showDetail('an')">安</span>
-      <span class="kanji" onclick="showDetail('tei')">定</span>
+      <span class="kanji" onclick="showDetail('shin')">心</span>
     </div>
-    <span class="furigana">（あんてい）</span>
-    <div class="meaning">안정</div>
+    <span class="furigana">（あんしん）</span>
+    <div class="meaning">안심</div>
   </div>
 
   <!-- 安 쪼개기 페이지 -->
@@ -68,12 +73,12 @@
     </div>
   </div>
 
-  <!-- 定 쪼개기 페이지 -->
-  <div id="tei-detail" class="card hidden">
-    <div class="kanji" onclick="goBack()">定</div>
+  <!-- 心 쪼개기 페이지 -->
+  <div id="shin-detail" class="card hidden">
+    <div class="kanji" onclick="goBack()">心</div>
     <div class="details">
-      <strong>宀(집) + 正(바르다)</strong><br>
-      집이 바르다 → 안정되다, 정하다
+      <strong>心(마음)</strong><br>
+      마음 → 심장, 마음
     </div>
   </div>
 
@@ -85,9 +90,20 @@
     function goBack() {
       document.getElementById('main-card').classList.remove('hidden');
       document.getElementById('an-detail').classList.add('hidden');
-      document.getElementById('tei-detail').classList.add('hidden');
+      document.getElementById('shin-detail').classList.add('hidden');
     }
   </script>
 </body>
 </html>
+"""
 
+# Write to file
+with open("/mnt/data/index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+# Create ZIP
+zip_path = "/mnt/data/anshin_split.zip"
+with ZipFile(zip_path, 'w') as zipf:
+    zipf.write("/mnt/data/index.html", arcname="index.html")
+
+zip_path
